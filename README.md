@@ -1,6 +1,6 @@
 # Aturan
 
-- Tidak boleh merubah file HTML dan CSS.
+- Tidak boleh merubah atau menambahkan file HTML dan CSS.
 - Hanya boleh merubah file Javascript-nya.
 
 ## Soal 1
