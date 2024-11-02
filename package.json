@@ -1,0 +1,12 @@
+{
+  "name": "jquery_nodejs_route",
+  "version": "1.0.0",
+  "description": "Tugas routing website menggunakan nodejs dan jquery",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "node src/route-script.js"
+  },
+  "author": "Farras Shidiq",
+  "license": "ISC"
+}
