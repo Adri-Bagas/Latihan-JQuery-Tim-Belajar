@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimalistic Futuristic Web App</title>
+    <link rel="stylesheet" href="./style/style.css" />
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav>
+        <ul>
+            <li class="nav" id="HomeNav">Home</li>
+            <li class="nav" id="AboutNav">About</li>
+            <li class="nav" id="ContactNav">Contact</li>
+        </ul>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <h1 id="header">Futuristic Cards</h1>
+        <p>Minimalistic design with a modern feel.</p>
+    </header>
+
+    <!-- Card Section -->
+    <section class="cards">
+        <div class="card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Cat_img.jpg/1200px-Cat_img.jpg" alt="Cat Image" />
+            <div class="card-content">
+                <h2>Cute Cat</h2>
+                <p>
+                    This is a cute cat, enjoying its life. Cats are known for their
+                    independence and curiosity.
+                </p>
+            </div>
+
+            <button class="close" type="button">
+                Remove
+            </button>
+        </div>
+        <div class="card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/900px-Cat03.jpg" alt="Cat Image" />
+            <div class="card-content">
+                <h2>Mysterious Cat</h2>
+                <p>
+                    With its piercing eyes, this cat seems to be plotting something in
+                    the shadows.
+                </p>
+            </div>
+            <button class="close" type="button">
+                Remove
+            </button>
+        </div>
+    </section>
+</body>
+
+<script>
+     $(document).ready(function () {
+ $('.close').click(function() {
+    $(this).parent().remove();
+  });
+})
+
+
+var settings = {
+      url: "https://ghibliapi.vercel.app/films",
+      method: "GET",
+      async: false
+    };
+
+    $.ajax(settings).done(function (response) {
+      for (let i = 0; i < 3; i++) {
+        const e = response[i];
+      $(".cards").append(`<div class="card">
+                <img src="${e.image}" alt="Cat Image" />
+                <div class="card-content">
+                    <h2>${e.title}</h2>
+                    <p>
+                       ${e.description}
+                    </p>
+                </div>
+                <button class="close" type="button">
+                    Remove
+                </button>
+            </div>`);
+      }
+    });
+
+    function Home() {
+        $('.cards').show();
+        $('#header').text('Futuristic Cards');
+        $('header p').show();
+        $('.about-content, .contact-content').remove();
+    }
+
+    function About() {
+        $('.cards').hide();
+        $('#header').text('About Page');
+        $('header p').hide();
+        $('.contact-content').remove();
+        $('.about-content').remove();
+        $('<div class="about-content"><p>About Page</p></div>').insertAfter('header');
+    }
+    
+    function Contact() {
+        $('.cards').hide();
+        $('#header').text('Contact');
+        $('header p').hide();
+        $('.about-content').remove();
+        $('.contact-content').remove();
+        $(`
+            <div class="contact-content">
+                <img src="https://i.pinimg.com/enabled_hi/564x/6c/1e/44/6c1e44267fc52496027eb408fd1ae030.jpg" alt="glenn ganteng">
+                <h2>glennmartua@gmail.com</h2>
+                <p>087787182632</p>
+            </div>
+        `).insertAfter('header');
+    }
+
+    $('#HomeNav').click(Home);
+    $('#AboutNav').click(About);
+    $('#ContactNav').click(Contact);
+
+    
+    Home();
+    loadInitialCards();
+
+
+
+
+
+</script>
+
+<style>
+    /* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+/* Navbar styles */
+nav {
+    background-color: #222;
+    padding: 1em;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 1em;
+}
+
+nav ul li a {
+    color: #f0f0f0;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+nav ul li a:hover {
+    color: #ff007f;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    padding: 3em 0;
+}
+
+header h1 {
+    font-size: 3em;
+    color: #ff007f;
+}
+
+header p {
+    font-size: 1.2em;
+    color: #ccc;
+}
+
+/* Card Section styles */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    padding: 2em;
+}
+
+.card {
+    background-color: #333;
+    border-radius: 10px;
+    width: 300px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    /* Half of the card */
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 1em;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card h2 {
+    color: #ff007f;
+    margin-bottom: 0.5em;
+}
+
+.card p {
+    color: #ccc;
+    font-size: 0.9em;
+}
+
+.close {
+    position: relative;
+}
+</style>
+
+</html>
